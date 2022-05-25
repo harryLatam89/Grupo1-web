@@ -3,7 +3,7 @@ export class Zurlrest {
 
     public static administrador: string = Zurlrest.dominio + '/administrador';
     public static aplicacion: string = Zurlrest.dominio + '/aplicacion';
-    public static arealaboral: string = Zurlrest.dominio + '/aplicacion';
+    public static arealaboral: string = Zurlrest.dominio + '/arealaboral';
     public static candidato: string = Zurlrest.dominio + '/candidato';
     public static competencia_candidato: string = Zurlrest.dominio + '/competenciacandidato';
     public static competencias: string = Zurlrest.dominio + '/competencia';

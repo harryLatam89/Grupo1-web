@@ -85,6 +85,8 @@ export class EntityParser {
             data.codigoDocumento,
             data.tipoDocumento,
             data.fechaCreacion,
+            data.correo,
+            data.telefono,
             data.activo,
         );
     }

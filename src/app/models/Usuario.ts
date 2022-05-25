@@ -1,14 +1,16 @@
 export class Usuario {
   constructor(
-    private idUsario: number,
-    private nombre: string,
-    private apellido: string,
-    private userName: string,
-    private userPass: string,
-    private codigoDocumento: string,
-    private tipoDocumento: string,
-    private fechaCreacion: Date,
-    private activo: boolean,
+    public idUsario: number,
+    public nombre: string,
+    public apellido: string,
+    public userName: string,
+    public userPass: string,
+    public codigoDocumento: string,
+    public tipoDocumento: string,
+    public fechaCreacion: Date,
+    public correo: string,
+    public telefono: string,
+    public activo: boolean,
   ) {
   }
 }

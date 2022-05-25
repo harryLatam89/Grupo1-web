@@ -1,0 +1,128 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card>
+                <label class="h4">Iniciar Sesion</label>
+                <div class="col-md-12">
+                    <form id="frmLogin" [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Usuario</mat-label>
+                                <input matInput required formControlName="usuario" [ngClass]="{ 'is-invalid': loginF('usuario')?.errors }" autocomplete="username" />
+                                <mat-error *ngIf="loginF('usuario')?.errors">ingresa usuario</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Password</mat-label>
+                                <input matInput type="password" required formControlName="password" [ngClass]="{ 'is-invalid': loginF('password')?.errors }" autocomplete="current-password" />
+                                <mat-error *ngIf="loginF('password')?.errors">ingresa password</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <button mat-stroked-button color="accent" type="submit">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <label class="h6">Ingresar con</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <button mat-flat-button>
+                                <mat-icon aria-hidden="false" aria-label="facebook icon">facebook</mat-icon>
+                              </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button mat-flat-button>
+                                <mat-icon aria-hidden="false" aria-label="google icon">mail</mat-icon>
+                              </button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card>
+                <label class="h4">Registrarse</label>
+                <div class="col-md-12">
+                    <form id="frmRegistrarse" [formGroup]="registrarseForm" (ngSubmit)="registrarse()">
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Nombre</mat-label>
+                                <input matInput required formControlName="nombre" [ngClass]="{ 'is-invalid': registrarseF('nombre')?.errors }" />
+                                <mat-error *ngIf="registrarseF('nombre')?.errors">ingresa nombre</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Apellido</mat-label>
+                                <input matInput required formControlName="apellido" [ngClass]="{ 'is-invalid': registrarseF('apellido')?.errors }" />
+                                <mat-error *ngIf="registrarseF('apellido')?.errors">ingresa apellido</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Usuario</mat-label>
+                                <input matInput required formControlName="userName" [ngClass]="{ 'is-invalid': registrarseF('userName')?.errors }" autocomplete="username" />
+                                <mat-error *ngIf="registrarseF('userName')?.errors">ingresa usuario</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Password</mat-label>
+                                <input matInput type="password" required formControlName="userPass" [ngClass]="{ 'is-invalid': registrarseF('userPass')?.errors }" autocomplete="current-password" />
+                                <mat-error *ngIf="registrarseF('userPass')?.errors">ingresa password</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Codigo Identidad</mat-label>
+                                <input matInput required formControlName="codigoDocumento" [ngClass]="{ 'is-invalid': registrarseF('codigoDocumento')?.errors }" />
+                                <mat-error *ngIf="registrarseF('codigoDocumento')?.errors">ingresa codigo de identidad</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Tipo Identidad</mat-label>
+                                <mat-select required formControlName="tipoDocumento" [ngClass]="{ 'is-invalid': registrarseF('tipoDocumento')?.errors }">
+                                    <mat-option [value]="'DUI'">DUI</mat-option>
+                                    <mat-option [value]="'NIT'">NIT</mat-option>
+                                    <mat-option [value]="'PASAPORTE'">Pasaporte</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="registrarseF('tipoDocumento')?.errors">seleccione tipo de identidad</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Fecha Nacimiento</mat-label>
+                                <input matInput required type="date" formControlName="fechaCreacion" [ngClass]="{ 'is-invalid': registrarseF('fechaCreacion')?.errors }" />
+                                <mat-error *ngIf="registrarseF('fechaCreacion')?.errors">ingresa codigo de fecha</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Telefono</mat-label>
+                                <input matInput required formControlName="telefono" [ngClass]="{ 'is-invalid': registrarseF('telefono')?.errors }" />
+                                <mat-error *ngIf="registrarseF('telefono')?.errors">ingresa telefono</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Correo</mat-label>
+                                <input matInput required formControlName="correo" [ngClass]="{ 'is-invalid': registrarseF('correo')?.errors }" />
+                                <mat-error *ngIf="registrarseF('correo')?.errors">ingresa correo</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <button mat-stroked-button color="accent" type="submit">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

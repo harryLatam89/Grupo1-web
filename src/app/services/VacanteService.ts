@@ -29,7 +29,6 @@ export class VacanteService extends AbSerbice<Vacantes> {
         } else {
             return id;
         }
-
     }
     protected toEntity(data: any): Vacantes {
         return EntityParser.parseVacante(data);
