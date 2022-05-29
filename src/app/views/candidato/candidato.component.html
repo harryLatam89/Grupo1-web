@@ -1,0 +1,104 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <mat-card>
+                    <mat-card-header>
+                        <label class="h4">Datos del Candidato</label>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form id="frmCandidato" [formGroup]="candidatoForm" (ngSubmit)="actualizarDatosCandidato()">
+                            <div class="row">
+                                <mat-form-field>
+                                    <mat-label>¿Esta Laborando?</mat-label>
+                                    <mat-select required formControlName="laborando" [ngClass]="{ 'is-invalid': candidatoF('laborando')?.errors }">
+                                        <mat-option [value]="true">SI</mat-option>
+                                        <mat-option [value]="false">NO</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="candidatoF('laborando')?.errors">¿sera que esta laborando?</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row" *ngIf="areaLaboralList && areaLaboralList.length > 0">
+                                <mat-form-field>
+                                    <mat-label>AreaLaboral</mat-label>
+                                    <mat-select [compareWith]="compareIds" required formControlName="arealaboral" [ngClass]="{ 'is-invalid': candidatoF('arealaboral')?.errors }">
+                                        <mat-option *ngFor="let area of areaLaboralList; let i = index" [value]="area.idArea">{{area.nombreArea}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="candidatoF('arealaboral')?.errors">Seleccionar area laboral</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <button mat-stroked-button color="primary" type="submit">Actualizar Datos</button>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="row">
+                <mat-card>
+                    <mat-card-header>
+                        <label class="h4">Datos Personales</label>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form id="frmUser" [formGroup]="usuarioForm" (ngSubmit)="actualizarDatosUsuario()">
+                            <div class="row">
+                                <mat-form-field>
+                                    <mat-label>Correo</mat-label>
+                                    <input matInput required formControlName="correo" [ngClass]="{ 'is-invalid': usuarioF('correo')?.errors }" />
+                                    <mat-error *ngIf="usuarioF('correo')?.errors">Ingrese correo</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row" *ngIf="areaLaboralList && areaLaboralList.length > 0">
+                                <mat-form-field>
+                                    <mat-label>Telefono</mat-label>
+                                    <input matInput required formControlName="telefono" [ngClass]="{ 'is-invalid': usuarioF('telefono')?.errors }" />
+                                    <mat-error *ngIf="usuarioF('telefono')?.errors">Ingrese numero de telefono</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <button mat-stroked-button color="primary" type="submit">Actualizar Datos</button>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <mat-card>
+                    <mat-card-header>
+                        <label class="h4">Competencias Registradas</label>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <form id="frmCompetencia" [formGroup]="competenciasForm" (ngSubmit)="registrarCompetenciaDeCandidato()">
+                                <div class="row" *ngIf="competenciasList && competenciasList.length > 0">
+                                    <mat-form-field>
+                                        <mat-label>Competencia</mat-label>
+                                        <mat-select required formControlName="competencia" [ngClass]="{ 'is-invalid': competenciasF('competencia')?.errors }">
+                                            <mat-option *ngFor="let competenciaw of competenciasList; let i = index" [value]="competenciaw.idCompetencia">{{competenciaw.nombreCompetencia}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="competenciasF('competencia')?.errors">seleccione una competencia</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row">
+                                    <button mat-stroked-button color="primary" type="submit">Agregar Competencia</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <mat-divider></mat-divider>
+                        </div>
+                        <div class="row">
+                            <mat-chip-list aria-label="Competencias" *ngIf="competenciasCandidatoList && competenciasCandidatoList.length > 0">
+                                <mat-chip *ngFor="let competenciaq of competenciasCandidatoList">
+                                    {{competenciaq.competencia.nombreCompetencia}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
