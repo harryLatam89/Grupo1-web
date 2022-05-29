@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationExtras, Router } from '@angular/router';
-import { AreaLaboral } from '../models/AreaLaboral';
-import { Candidato } from '../models/Candidato';
-import { Usuario } from '../models/Usuario';
-import { CandidatoService } from '../services/CandidatoService';
-import { UsuarioService } from '../services/UsuarioService';
-import { Utils } from '../utils/utilidades';
+import { AreaLaboral } from '../../models/AreaLaboral';
+import { Candidato } from '../../models/Candidato';
+import { Usuario } from '../../models/Usuario';
+import { CandidatoService } from '../../services/CandidatoService';
+import { UsuarioService } from '../../services/UsuarioService';
+import { Utils } from '../../utils/utilidades';
 
 @Component({
   selector: 'app-registrarse',
@@ -26,8 +26,8 @@ export class RegistrarseComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    private formBuilder: FormBuilder 
-  ) { 
+    private formBuilder: FormBuilder
+  ) {
     this.registrarseForm = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -46,6 +46,7 @@ export class RegistrarseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
   registrarseF(control: string) { return this.registrarseForm.get(control); }
@@ -57,21 +58,14 @@ export class RegistrarseComponent implements OnInit {
       let usuario: Usuario = Utils.usuarioPrueba();
       usuario.userName = this.loginF('usuario')?.value;
       usuario.userPass = this.loginF('password')?.value;
-      this.usuarioService.iniciarSesion(usuario, this._snackBar);
-      let usr = localStorage.getItem('usrnm');
-      if (usr) {
-        let userIniciado: Usuario = JSON.parse(usr);
-        if (userIniciado && userIniciado.idUsario > 0) {
-          // cambiar de pagina
-          let navigationExtras: NavigationExtras = {
-            queryParams: {
-              "car": true
-            }
-          };
-          this._router.navigate(['/inicio'],navigationExtras);
-        }
-      }
-
+      this.usuarioService.iniciarSesion(usuario, this._snackBar, (response: boolean) => {
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            "car": true
+          }
+        };
+        this._router.navigate(['/candidato'], navigationExtras);
+      });
     } else {
       Utils.openSnackBar('Ocurrio un error al validar los datos', 'ok', this._snackBar);
     }
@@ -83,14 +77,17 @@ export class RegistrarseComponent implements OnInit {
         this.registrarseF('nombre')?.value, this.registrarseF('apellido')?.value,
         this.registrarseF('userName')?.value, this.registrarseF('userPass')?.value,
         this.registrarseF('codigoDocumento')?.value, this.registrarseF('tipoDocumento')?.value,
-        this.registrarseF('fechaCreacion')?.value,this.registrarseF('correo')?.value,
-         this.registrarseF('telefono')?.value, true
+        this.registrarseF('fechaCreacion')?.value, this.registrarseF('correo')?.value,
+        this.registrarseF('telefono')?.value, true
       );
-      let candidato: Candidato = new Candidato(0, usuario, new AreaLaboral(1,'are1'), false);
-      let registrado = this.candidatoService.creteOne(candidato);
-      if (registrado == true) {
-        Utils.openSnackBar('Cliente Registrado', 'ok', this._snackBar);
-      }
+      let candidato: Candidato = new Candidato(0, usuario, new AreaLaboral(1, 'are1'), false);
+      this.candidatoService.creteOne(candidato, (response: boolean) => {
+        if (response == true) {
+          Utils.openSnackBar('Cliente Registrado', 'ok', this._snackBar);
+        } else {
+          Utils.openSnackBar('Ocurrio un error al registrar usuario', 'ok', this._snackBar);
+        }
+      });
     } else {
       Utils.openSnackBar('Ocurrio un error al validar los datos', 'ok', this._snackBar);
     }
