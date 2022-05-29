@@ -4,9 +4,9 @@ import { Usuario } from "./Usuario";
 
 export class Competencias {
     constructor(
-        private idCompetencia: number,
-        private areaLaboral: AreaLaboral,
-        private nombreCompetencia: string,
+        public idCompetencia: number,
+        public areaLaboral: AreaLaboral,
+        public nombreCompetencia: string,
     ) {
     }
 }

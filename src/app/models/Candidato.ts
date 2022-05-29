@@ -3,10 +3,10 @@ import { Usuario } from "./Usuario";
 
 export class Candidato {
     constructor(
-        private idCandidato: number,
-        private usuario: Usuario,
-        private areaLaboral: AreaLaboral,
-        private laborando: boolean,
+        public idCandidato: number,
+        public usuario: Usuario,
+        public areaLaboral: AreaLaboral,
+        public laborando: boolean,
     ) {
     }
 }

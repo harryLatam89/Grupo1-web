@@ -45,7 +45,7 @@ export class EntityParser {
 
     public static parseCompetenciaCandidato(data: any): CompetenciaCandidato {
         return new CompetenciaCandidato(
-            data.IdCompetencia,
+            data.idCompetencia,
             this.parseCandidato(data.candidato),
             this.parseCompetencias(data.competencia),
         );
@@ -53,7 +53,7 @@ export class EntityParser {
 
     public static parseCompetencias(data: any): Competencias {
         return new Competencias(
-            data.IdCompetencia,
+            data.idCompetencia,
             this.parseAreaLaboral(data.areaLaboral),
             data.nombreCompetencia
         );

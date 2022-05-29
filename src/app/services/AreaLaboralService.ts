@@ -8,7 +8,7 @@ import { Zurlrest } from './abs/zurlrest';
 @Injectable()
 export class AreaLaboralService extends AbSerbice<AreaLaboral> {
 
-    private url: string = Zurlrest.aplicacion;
+    private url: string = Zurlrest.arealaboral;
 
     constructor(public rests: RestService) {
         super(rests);

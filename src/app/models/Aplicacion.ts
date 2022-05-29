@@ -4,9 +4,9 @@ import { Vacantes } from "./Vacantes";
 
 export class Aplicacion {
   constructor(
-    private idAplicacion: number,
-    private candidato: Candidato,
-    private vacante: Vacantes,
+    public idAplicacion: number,
+    public candidato: Candidato,
+    public vacante: Vacantes,
   ) {
   }
 }

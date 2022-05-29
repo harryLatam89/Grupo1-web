@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Usuario } from '../models/Usuario';
 import { EntityParser } from '../utils/entity.parser';
@@ -11,7 +12,7 @@ import { Zurlrest } from './abs/zurlrest';
 @Injectable()
 export class UsuarioService extends AbSerbice<Usuario> {
 
-    private url: string = Zurlrest.contratante;
+    private url: string = Zurlrest.usuario;
 
     constructor(public rests: RestService) {
         super(rests);
@@ -38,7 +39,7 @@ export class UsuarioService extends AbSerbice<Usuario> {
         return EntityParser.parseUsuario(data);
     }
 
-    public iniciarSesion(usuario: Usuario, snackBar: MatSnackBar): boolean {
+    public iniciarSesion(usuario: Usuario, snackBar: MatSnackBar, successListener: (response: boolean) => void): boolean {
         let exito: boolean = false;
         lastValueFrom(this.rest.postOne(this.getUrl().concat('/login'), usuario)).then(
             data => {
@@ -46,13 +47,17 @@ export class UsuarioService extends AbSerbice<Usuario> {
                     if (data) {
                         localStorage.setItem('usrnm', JSON.stringify(data));
                         exito = true;
+                        successListener(exito);
                     }
                 } catch (errorp) {
                     console.log('iniciar sesion service error:', errorp);
                 }
             }, error => {
-                Utils.openSnackBar(error.error.mensaje, 'ok', snackBar);
-                //console.log('rest get error', error.error.mensaje);
+                if (error && error?.status == 400) {
+                    Utils.openSnackBar('Usuario o Contraseña no encontradados', 'ok', snackBar);
+                } else {
+                    Utils.openSnackBar('Ocurrio un error con el servidor', 'ok', snackBar);
+                }
             }
         ).catch(this.handleErrorLocal);
         return exito;

@@ -27,8 +27,8 @@ export abstract class AbSerbice<Entity> {
 
 
 
-    public getList(): Array<Entity> {
-        lastValueFrom(this.rest.getOne(this.getUrl())).then(
+    public getList(successListener: (response:Array<Entity>) => void): Array<Entity> {
+        lastValueFrom(this.rest.getOne(this.getUrl().concat('/lista'))).then(
             data => {
                 try {
                     if (data) {
@@ -40,6 +40,7 @@ export abstract class AbSerbice<Entity> {
                         data.forEach((element: Entity) => {
                             this.list.push(this.toEntity(element));
                         });
+                        successListener(this.list);
                     }
                 } catch (errorp) {
                     console.log('rest parse error:', errorp)
@@ -51,7 +52,7 @@ export abstract class AbSerbice<Entity> {
         return this.list;
     }
 
-    getOneById(id: number) {
+    getOneById(id: number,successListener: (response:Entity) => void): Entity {
         let urld = this.getUrl() + '/' + id;
         lastValueFrom(this.rest.getOne(urld)).then(
             data => {
@@ -63,6 +64,7 @@ export abstract class AbSerbice<Entity> {
                          * para evitar errores comunes a la hora de recivir JSON 
                          */
                         this.one = this.toEntity(data);
+                        successListener(this.one);
                     }
                 } catch (errorp) {
                     console.log('rest parse error:', errorp)
@@ -74,31 +76,33 @@ export abstract class AbSerbice<Entity> {
         return this.one;
     }
 
-    creteOne(entity: Entity): boolean {
+    creteOne(entity: Entity,successListener: (response:boolean) => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.postOne(this.getUrl(), entity)).then(
             resp => {
                 if (resp) {
                     console.log('exitoso');
                     exito = true;
+                    successListener(exito);
                 }
             }
         ).catch(this.handleError);
         return exito;
     }
 
-    editOne(entity: Entity): boolean {
+    editOne(entity: Entity,successListener: (response:boolean) => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.putOne(this.getUrl() + '/' + this.getEntityId(entity), entity)).then(resp => {
             if (resp) {
                 console.log('exitoso');
                 exito = true;
+                successListener(exito);
             }
         }).catch(this.handleError);
         return exito;
     }
 
-    deleteOne(id: number): boolean {
+    deleteOne(id: number,successListener: () => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.deleteOne(this.getUrl(), id)).then(entity => {
             try {

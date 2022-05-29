@@ -1,8 +1,8 @@
 
 export class AreaLaboral {
   constructor(
-    private idArea: number,
-    private nombreArea: string,
+    public idArea: number,
+    public nombreArea: string,
   ) {
   }
 }
