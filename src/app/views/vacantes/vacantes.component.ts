@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -17,8 +17,8 @@ import { Utils } from 'src/app/utils/utilidades';
 })
 export class VacantesComponent implements OnInit {
 
-  public vacanteForm: FormGroup;
-  public competenciaForm: FormGroup;
+  public vacanteForm: UntypedFormGroup;
+  public competenciaForm: UntypedFormGroup;
   private competenciaSeleccionadaList: Array<Competencias> = [];
   private competenciasList: Array<Competencias> = [];
   private contratante: Contratante = Utils.contratanteVacio();
@@ -30,7 +30,7 @@ export class VacantesComponent implements OnInit {
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.vacanteForm = this.formBuilder.group({
       nombre: ['', [Validators.required]],

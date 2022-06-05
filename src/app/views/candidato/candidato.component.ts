@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -22,9 +22,9 @@ import { Utils } from '../../utils/utilidades';
 })
 export class CandidatoComponent implements OnInit {
 
-  public candidatoForm: FormGroup;
-  public usuarioForm: FormGroup;
-  public competenciasForm: FormGroup;
+  public candidatoForm: UntypedFormGroup;
+  public usuarioForm: UntypedFormGroup;
+  public competenciasForm: UntypedFormGroup;
   public competenciasList: Array<Competencias> = [];
   public areaLaboralList: Array<AreaLaboral> = [];
   public competenciasCandidatoList: Array<CompetenciaCandidato> = [];
@@ -39,7 +39,7 @@ export class CandidatoComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.candidatoForm = this.formBuilder.group({
       arealaboral: [0, [Validators.required, Validators.min(1)]],

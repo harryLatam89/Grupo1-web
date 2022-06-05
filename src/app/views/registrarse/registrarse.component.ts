@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationExtras, Router } from '@angular/router';
@@ -17,8 +17,8 @@ import { Utils } from '../../utils/utilidades';
 })
 export class RegistrarseComponent implements OnInit {
 
-  public registrarseForm: FormGroup;
-  public loginForm: FormGroup;
+  public registrarseForm: UntypedFormGroup;
+  public loginForm: UntypedFormGroup;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -26,7 +26,7 @@ export class RegistrarseComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.registrarseForm = this.formBuilder.group({
       nombre: ['', [Validators.required]],
