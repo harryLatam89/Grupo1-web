@@ -38,6 +38,7 @@ import { UsuarioService } from './services/UsuarioService';
 import { VacanteService } from './services/VacanteService';
 import { CandidatoComponent } from './views/candidato/candidato.component';
 import { RegistrarseComponent } from './views/registrarse/registrarse.component';
+import { VacantesComponent } from './views/vacantes/vacantes.component';
 
 
 const materialModules = [
@@ -80,7 +81,8 @@ const services = [
   declarations: [
     AppComponent,
     RegistrarseComponent,
-    CandidatoComponent
+    CandidatoComponent,
+    VacantesComponent
   ],
   imports: [
     BrowserModule,

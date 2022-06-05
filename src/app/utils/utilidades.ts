@@ -3,6 +3,7 @@ import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { AreaLaboral } from "../models/AreaLaboral";
 import { Candidato } from "../models/Candidato";
 import { Competencias } from "../models/Competencias";
+import { Contratante } from "../models/Contratante";
 import { Usuario } from "../models/Usuario";
 
 export class Utils {
@@ -16,6 +17,10 @@ export class Utils {
 
   public static candodatoVacio(): Candidato {
     return new Candidato(0, Utils.usuarioPrueba(), new AreaLaboral(0, 'vacio'), false);
+  }
+
+  public static contratanteVacio(): Contratante {
+    return new Contratante(0, Utils.usuarioPrueba(), 'vacio');
   }
 
   static snackBarConfig(): MatSnackBarConfig {
