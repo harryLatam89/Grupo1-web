@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { lastValueFrom } from 'rxjs';
+import { Competencias } from '../models/Competencias';
 import { CompetenciaVacante } from '../models/CompetenciaVacante';
+import { Vacantes } from '../models/Vacantes';
 import { EntityParser } from '../utils/entity.parser';
+import { Utils } from '../utils/utilidades';
 import { AbSerbice } from './abs/abstract.service';
 import { RestService } from './abs/rest.service';
 import { Zurlrest } from './abs/zurlrest';
@@ -33,6 +38,36 @@ export class CompetenciaVacanteService extends AbSerbice<CompetenciaVacante> {
     }
     protected toEntity(data: any): CompetenciaVacante {
         return EntityParser.parseCompetenciaVacante(data);
+    }
+
+    public listaCompetenciasDeVacante(vacante: Vacantes, snackBar: MatSnackBar, successListener: (list: Array<Competencias>) => void): Array<Competencias> {
+        let competenciasEncontradas: Array<Competencias> = [];
+        lastValueFrom(this.rest.postOne(this.getUrl().concat('/vacante'), vacante)).then(
+            data => {
+                try {
+                    if (data) {
+                        data.forEach((element: Competencias) => {
+                            if (element?.idCompetencia > 0) competenciasEncontradas.push(element);
+                        });
+                        successListener(competenciasEncontradas);
+                    }
+                } catch (errorp) {
+                    console.log('Error al buscar competencias de la vacante:', errorp);
+                }
+            }, error => {
+                if (error && error?.status == 400) {
+                    //Utils.openSnackBar('No se encontraron competencias registradas', 'ok', snackBar);
+                } else {
+                    Utils.openSnackBar('Ocurrio un error con el servidor al buscar competencias', 'ok', snackBar);
+                }
+            }
+        ).catch(this.handleErrorLocal);
+        return competenciasEncontradas;
+    }
+
+    private handleErrorLocal(error: any): Promise<Array<any>> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
 
 }

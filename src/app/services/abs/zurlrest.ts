@@ -11,5 +11,7 @@ export class Zurlrest {
     public static contratante: string = Zurlrest.dominio + '/contratante';
     public static usuario: string = Zurlrest.dominio + '/usuario';
     public static vacante: string = Zurlrest.dominio + '/vacante';
+    public static rol: string = Zurlrest.dominio + '/rol';
+    public static rol_usuario: string = Zurlrest.dominio + '/rolusuario';
 
 }

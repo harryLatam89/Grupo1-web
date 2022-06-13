@@ -55,7 +55,7 @@ export class CompetenciaCandidatoService extends AbSerbice<CompetenciaCandidato>
                 }
             }, error => {
                 if (error && error?.status == 400) {
-                    Utils.openSnackBar('No se encontraron competencias registradas', 'ok', snackBar);
+                    //Utils.openSnackBar('No se encontraron competencias registradas', 'ok', snackBar);
                 } else {
                     Utils.openSnackBar('Ocurrio un error con el servidor al buscar candidato', 'ok', snackBar);
                 }

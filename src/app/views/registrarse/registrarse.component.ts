@@ -64,7 +64,7 @@ export class RegistrarseComponent implements OnInit {
             "car": true
           }
         };
-        this._router.navigate(['/candidato'], navigationExtras);
+        this._router.navigate(['/entrada'], navigationExtras);
       });
     } else {
       Utils.openSnackBar('Ocurrio un error al validar los datos', 'ok', this._snackBar);
@@ -81,8 +81,8 @@ export class RegistrarseComponent implements OnInit {
         this.registrarseF('telefono')?.value, true
       );
       let candidato: Candidato = new Candidato(0, usuario, new AreaLaboral(1, 'are1'), false);
-      this.candidatoService.creteOne(candidato, (response: boolean) => {
-        if (response == true) {
+      this.candidatoService.creteOne(candidato, (response: Candidato) => {
+        if (response && response?.idCandidato > 0) {
           Utils.openSnackBar('Cliente Registrado', 'ok', this._snackBar);
         } else {
           Utils.openSnackBar('Ocurrio un error al registrar usuario', 'ok', this._snackBar);

@@ -6,6 +6,8 @@ import { CompetenciaCandidato } from "../models/CompetenciaCandidato";
 import { Competencias } from "../models/Competencias";
 import { CompetenciaVacante } from "../models/CompetenciaVacante";
 import { Contratante } from "../models/Contratante";
+import { Rol } from "../models/Rol";
+import { RolUsuario } from "../models/RolUsuario";
 import { Usuario } from "../models/Usuario";
 import { Vacantes } from "../models/Vacantes";
 
@@ -99,6 +101,21 @@ export class EntityParser {
             data.descripcion,
             data.estado,
             data.activo,
+        );
+    }
+
+    public static parseRol(data: any): Rol {
+        return new Rol(
+            data.idRol,
+            data.nombre
+        );
+    }
+
+    public static parseRolUsuario(data: any): RolUsuario {
+        return new RolUsuario(
+            data.idRol,
+            this.parseUsuario(data.usuario),
+            this.parseRol(data.rol)
         );
     }
 }

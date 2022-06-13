@@ -105,7 +105,7 @@ export class CandidatoComponent implements OnInit {
 
   cargarCompetenciasDeCandidato() {
     if (this.candidato && this.candidato.idCandidato > 0) {
-      this.competenciasCandidatoList = this.competenciaCandidatoService.buscarPorCandidato(this.candidato, this._snackBar, (response: CompetenciaCandidato[]) => { });
+      this.competenciaCandidatoService.buscarPorCandidato(this.candidato, this._snackBar, (response: CompetenciaCandidato[]) => { this.competenciasCandidatoList = response });
     } else {
       let usr = localStorage.getItem('usrnm');
       if (usr) {
@@ -113,7 +113,7 @@ export class CandidatoComponent implements OnInit {
         if (userIniciado && userIniciado.idUsario > 0) {
           this.candidatoService.buscarPorUsuario(userIniciado, this._snackBar, (candidatoFound: Candidato) => {
             if (candidatoFound && candidatoFound.idCandidato > 0) {
-              this.competenciasCandidatoList = this.competenciaCandidatoService.buscarPorCandidato(this.candidato, this._snackBar, (response: CompetenciaCandidato[]) => { });
+              this.competenciaCandidatoService.buscarPorCandidato(this.candidato, this._snackBar, (response: CompetenciaCandidato[]) => { this.competenciasCandidatoList = response });
               this.candidato = candidatoFound;
             }
           });
@@ -136,8 +136,8 @@ export class CandidatoComponent implements OnInit {
         let competencia: Competencias = Utils.competenciaVacia();
         this.competenciasList.filter(objeto => objeto?.idCompetencia == this.competenciasF('competencia')?.value).forEach(objeto => competencia = objeto);
         if (this.candidato && this.candidato.idCandidato > 0 && competencia && competencia.idCompetencia > 0) {
-          this.competenciaCandidatoService.creteOne(new CompetenciaCandidato(0, this.candidato, competencia), (response: boolean) => {
-            if (response) {
+          this.competenciaCandidatoService.creteOne(new CompetenciaCandidato(0, this.candidato, competencia), (response: CompetenciaCandidato) => {
+            if (response && competencia?.idCompetencia > 0) {
               this.cargarCompetenciasDeCandidato();
             }
           });

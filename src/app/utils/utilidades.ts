@@ -4,7 +4,9 @@ import { AreaLaboral } from "../models/AreaLaboral";
 import { Candidato } from "../models/Candidato";
 import { Competencias } from "../models/Competencias";
 import { Contratante } from "../models/Contratante";
+import { Menu } from "../models/Menu";
 import { Usuario } from "../models/Usuario";
+import { Vacantes } from "../models/Vacantes";
 
 export class Utils {
   public static usuarioPrueba(): Usuario {
@@ -18,15 +20,24 @@ export class Utils {
   public static candodatoVacio(): Candidato {
     return new Candidato(0, Utils.usuarioPrueba(), new AreaLaboral(0, 'vacio'), false);
   }
+  public static menuVacio(): Menu {
+    return new Menu(0, '', '');
+  }
 
   public static contratanteVacio(): Contratante {
     return new Contratante(0, Utils.usuarioPrueba(), 'vacio');
+  }
+
+  public static vacanteVacio(): Vacantes {
+    return new Vacantes(0, Utils.contratanteVacio(), 'vacio', 'vacio', 0, true);
   }
 
   static snackBarConfig(): MatSnackBarConfig {
     let snackConfig: MatSnackBarConfig = new MatSnackBarConfig();
     snackConfig.duration = 12000;
     snackConfig.panelClass = ['btn', 'btn-outline-dark'];
+    snackConfig.verticalPosition = 'top';
+    snackConfig.horizontalPosition = 'center';
     return snackConfig;
   }
 

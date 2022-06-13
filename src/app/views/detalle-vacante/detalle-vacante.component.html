@@ -1,0 +1,34 @@
+<mat-dialog-actions class="flex-row-reverse" [style.marginBottom]="'1em'">
+    <button class="col-md-4" mat-flat-button color="primary" mat-dialog-close>salir</button>
+</mat-dialog-actions>
+
+<div class="row">
+    <mat-divider></mat-divider>
+</div>
+
+<mat-dialog-content class="flex-row" [style.width]="innerWidths">
+    <div class="col-md-12">
+        <div class="row">
+            <mat-card [style.width]="'100%'">
+                <mat-card-title class="text-center">
+                    Detalle de la vacante
+                </mat-card-title>
+                <mat-card-subtitle class="text-center" *ngIf="vacante && vacante.idVacante > 0">
+                    <p>{{vacante.nombreVacante}}</p>
+                </mat-card-subtitle>
+                <mat-card-content class="text-center" *ngIf="vacante && vacante.idVacante > 0">
+                    <div class="row">
+                        <p>{{vacante.descripcion}}</p>
+                    </div>
+                    <div class="row">
+                        <mat-chip-list aria-label="Competencias" *ngIf="competenciaSeleccionadaList && competenciaSeleccionadaList.length > 0">
+                            <mat-chip *ngFor="let competenciaq of competenciaSeleccionadaList">
+                                {{competenciaq.nombreCompetencia}}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</mat-dialog-content>

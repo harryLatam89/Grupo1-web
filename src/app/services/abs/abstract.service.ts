@@ -27,7 +27,8 @@ export abstract class AbSerbice<Entity> {
 
 
 
-    public getList(successListener: (response:Array<Entity>) => void): Array<Entity> {
+    public getList(successListener: (response: Array<Entity>) => void): Array<Entity> {
+        this.list = [];
         lastValueFrom(this.rest.getOne(this.getUrl().concat('/lista'))).then(
             data => {
                 try {
@@ -52,7 +53,7 @@ export abstract class AbSerbice<Entity> {
         return this.list;
     }
 
-    getOneById(id: number,successListener: (response:Entity) => void): Entity {
+    getOneById(id: number, successListener: (response: Entity) => void): Entity {
         let urld = this.getUrl() + '/' + id;
         lastValueFrom(this.rest.getOne(urld)).then(
             data => {
@@ -76,21 +77,21 @@ export abstract class AbSerbice<Entity> {
         return this.one;
     }
 
-    creteOne(entity: Entity,successListener: (response:boolean) => void): boolean {
+    creteOne(entity: Entity, successListener: (response: Entity) => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.postOne(this.getUrl(), entity)).then(
             resp => {
                 if (resp) {
                     console.log('exitoso');
                     exito = true;
-                    successListener(exito);
+                    successListener(this.toEntity(resp));
                 }
             }
         ).catch(this.handleError);
         return exito;
     }
 
-    editOne(entity: Entity,successListener: (response:boolean) => void): boolean {
+    editOne(entity: Entity, successListener: (response: boolean) => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.putOne(this.getUrl() + '/' + this.getEntityId(entity), entity)).then(resp => {
             if (resp) {
@@ -102,7 +103,7 @@ export abstract class AbSerbice<Entity> {
         return exito;
     }
 
-    deleteOne(id: number,successListener: () => void): boolean {
+    deleteOne(id: number, successListener: () => void): boolean {
         var exito = false;
         lastValueFrom(this.rest.deleteOne(this.getUrl(), id)).then(entity => {
             try {

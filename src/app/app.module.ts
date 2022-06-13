@@ -36,7 +36,12 @@ import { CompetenciaVacanteService } from './services/CompetenciaVacanteService'
 import { ContratanteService } from './services/ContratanteService';
 import { UsuarioService } from './services/UsuarioService';
 import { VacanteService } from './services/VacanteService';
+import { AdministracionComponent } from './views/administracion/administracion.component';
 import { CandidatoComponent } from './views/candidato/candidato.component';
+import { ConformationComponent } from './views/conformation/conformation.component';
+import { DetalleVacanteComponent } from './views/detalle-vacante/detalle-vacante.component';
+import { EntradaComponent } from './views/entrada/entrada.component';
+import { MenuComponent } from './views/menu/menu.component';
 import { RegistrarseComponent } from './views/registrarse/registrarse.component';
 import { VacantesComponent } from './views/vacantes/vacantes.component';
 
@@ -82,7 +87,12 @@ const services = [
     AppComponent,
     RegistrarseComponent,
     CandidatoComponent,
-    VacantesComponent
+    VacantesComponent,
+    DetalleVacanteComponent,
+    ConformationComponent,
+    EntradaComponent,
+    MenuComponent,
+    AdministracionComponent
   ],
   imports: [
     BrowserModule,

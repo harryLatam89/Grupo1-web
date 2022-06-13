@@ -44,7 +44,6 @@ export class ContratanteService extends AbSerbice<Contratante> {
             data => {
                 try {
                     if (data) {
-                        localStorage.setItem('usrnm', JSON.stringify(data));
                         successListener(data);
                     }
                 } catch (errorp) {
