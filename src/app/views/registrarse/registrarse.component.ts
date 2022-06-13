@@ -80,14 +80,20 @@ export class RegistrarseComponent implements OnInit {
         this.registrarseF('fechaCreacion')?.value, this.registrarseF('correo')?.value,
         this.registrarseF('telefono')?.value, true
       );
-      let candidato: Candidato = new Candidato(0, usuario, new AreaLaboral(1, 'are1'), false);
-      this.candidatoService.creteOne(candidato, (response: Candidato) => {
-        if (response && response?.idCandidato > 0) {
-          Utils.openSnackBar('Cliente Registrado', 'ok', this._snackBar);
+      this.usuarioService.creteOne(usuario, listener => {
+        if (listener && listener.idUsario > 0) {
+          let candidato: Candidato = new Candidato(0, listener, new AreaLaboral(1, 'are1'), false);
+          this.candidatoService.creteOne(candidato, (response: Candidato) => {
+            if (response && response?.idCandidato > 0) {
+              Utils.openSnackBar('Cliente Registrado', 'ok', this._snackBar);
+            } else {
+              Utils.openSnackBar('Ocurrio un error al registrar usuario', 'ok', this._snackBar);
+            }
+          });
         } else {
           Utils.openSnackBar('Ocurrio un error al registrar usuario', 'ok', this._snackBar);
         }
-      });
+      })
     } else {
       Utils.openSnackBar('Ocurrio un error al validar los datos', 'ok', this._snackBar);
     }

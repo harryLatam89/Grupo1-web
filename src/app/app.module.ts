@@ -34,6 +34,8 @@ import { CompetenciaCandidatoService } from './services/CompetenciaCandidatoServ
 import { CompetenciaService } from './services/CompetenciaService';
 import { CompetenciaVacanteService } from './services/CompetenciaVacanteService';
 import { ContratanteService } from './services/ContratanteService';
+import { RolService } from './services/RolService';
+import { RolUsuarioService } from './services/RolUsuarioService';
 import { UsuarioService } from './services/UsuarioService';
 import { VacanteService } from './services/VacanteService';
 import { AdministracionComponent } from './views/administracion/administracion.component';
@@ -79,7 +81,9 @@ const services = [
   CompetenciaVacanteService,
   ContratanteService,
   UsuarioService,
-  VacanteService
+  VacanteService,
+  RolService,
+  RolUsuarioService
 ]
 
 @NgModule({

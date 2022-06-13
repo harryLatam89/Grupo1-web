@@ -27,7 +27,9 @@ export class MenuComponent implements OnInit {
   cargarMenusDeUsuario() {
     this.menusList.push(new Menu(1, '/entrada/vacantes', 'Vacantes'));
     this.menusList.push(new Menu(2, '/entrada/candidato', 'Datos de Candidato'));
+    this.menusList.push(new Menu(2, '/entrada/administracion', 'Administracion de Roles'));
     this.menusList.push(new Menu(3, '/login', 'cerrar sesion'));
+    
   }
 
   redirigirMenu(dir: string) {
